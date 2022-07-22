@@ -1,6 +1,15 @@
 # start by pulling the python image
 FROM python:3.8-alpine
-
+ENV PYTHONUNBUFFERED 1
+RUN set -e; \
+        apk add --no-cache --virtual .build-deps \
+                gcc \
+                libc-dev \
+                linux-headers \
+                mariadb-dev \
+                python3-dev \
+                postgresql-dev \
+        ;
 # copy the requirements file into the image
 COPY ./requirements.txt /app/requirements.txt
 
